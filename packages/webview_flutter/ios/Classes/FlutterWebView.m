@@ -90,6 +90,11 @@
     configuration.userContentController = userContentController;
     [self updateAutoMediaPlaybackPolicy:args[@"autoMediaPlaybackPolicy"]
                         inConfiguration:configuration];
+    
+    NSNumber* allowsInlineMediaPlayback = settings[@"allowsInlineMediaPlayback"];
+    if (allowsInlineMediaPlayback) {
+      configuration.allowsInlineMediaPlayback = [allowsInlineMediaPlayback boolValue];
+    }
 
     _webView = [[FLTWKWebView alloc] initWithFrame:frame configuration:configuration];
     _navigationDelegate = [[FLTWKNavigationDelegate alloc] initWithChannel:_channel];
